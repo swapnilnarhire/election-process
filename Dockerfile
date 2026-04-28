@@ -10,6 +10,9 @@ RUN npm run build
 FROM node:20-slim
 WORKDIR /app
 
+# Cache Buster
+ENV BUILD_VERSION=1.0.5
+
 # Install production dependencies for backend
 COPY backend/package*.json ./backend/
 WORKDIR /app/backend
@@ -19,7 +22,7 @@ RUN npm install --only=production
 COPY backend/ ./
 
 # Copy built frontend assets from Stage 1
-COPY --from=frontend-builder /app/frontend/dist /app/frontend/dist
+COPY --from=frontend-builder /app/frontend/dist ./public
 
 # Set environment variables
 ENV NODE_ENV=production

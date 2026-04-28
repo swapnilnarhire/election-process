@@ -1,4 +1,5 @@
 const express = require('express');
+console.log('--- [DEPLOYMENT VERSION 1.0.5] ---');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -14,8 +15,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 // Security and Performance Middlewares
 app.use(helmet({
-  contentSecurityPolicy: isProduction ? undefined : false,
-  crossOriginResourcePolicy: isProduction ? { policy: 'same-origin' } : false,
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: false,
 }));
 app.use(compression()); // Production Hardening: Compress responses
 const allowedOrigins = [
@@ -49,7 +50,7 @@ app.use('/api', routes);
 
 // Serve Static Frontend in Production
 if (isProduction) {
-  const frontendPath = path.resolve(__dirname, '../frontend/dist');
+  const frontendPath = path.resolve(__dirname, 'public');
   app.use(express.static(frontendPath));
 
   app.use((req, res, next) => {
