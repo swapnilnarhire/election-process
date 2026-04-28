@@ -10,19 +10,34 @@ const { logger } = require('./middleware/logger');
 
 const app = express();
 
-// Security and Performance Middlewares
-app.use(helmet()); // Production Hardening: Security headers
-app.use(compression()); // Production Hardening: Compress responses
 const isProduction = process.env.NODE_ENV === 'production';
-const allowedOrigin = isProduction 
-  ? (process.env.ALLOWED_ORIGIN || true) // 'true' reflects the request origin
-  : 'http://localhost:5173';
+
+// Security and Performance Middlewares
+app.use(helmet({
+  contentSecurityPolicy: isProduction ? undefined : false,
+  crossOriginResourcePolicy: isProduction ? { policy: 'same-origin' } : false,
+}));
+app.use(compression()); // Production Hardening: Compress responses
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:5174'
+];
 
 app.use(cors({ 
-  origin: allowedOrigin,
+  origin: (origin, callback) => {
+    if (!origin || !isProduction || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 }));
 
 // Logging and Body Parsing Middlewares
@@ -49,6 +64,15 @@ if (config.env === 'production') {
 // Global Error Handler
 app.use(errorHandler);
 
-app.listen(config.port, () => {
+const server = app.listen(config.port, () => {
   console.log(`[SERVER] Running in ${config.env} mode on port ${config.port}`);
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`[ERROR] Port ${config.port} is already in use. Please kill the process or use a different port.`);
+  } else {
+    console.error('[ERROR] Server failed to start:', err);
+  }
+  process.exit(1);
 });
