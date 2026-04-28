@@ -1,5 +1,5 @@
 const express = require('express');
-console.log('--- [DEPLOYMENT VERSION 1.0.5] ---');
+console.log('--- [DEPLOYMENT VERSION 1.0.6] ---');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -25,12 +25,17 @@ const allowedOrigins = [
   'http://localhost:5174',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:5173',
-  'http://127.0.0.1:5174'
+  'http://127.0.0.1:5174',
+  'https://election-assistant-443206840128.us-central1.run.app'
 ];
 
 app.use(cors({ 
   origin: (origin, callback) => {
-    if (!origin || !isProduction || allowedOrigins.includes(origin)) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    // In production, allow the exact production URL or any from allowedOrigins
+    if (allowedOrigins.includes(origin) || (isProduction && origin.includes('run.app'))) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));

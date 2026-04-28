@@ -11,7 +11,7 @@ FROM node:20-slim
 WORKDIR /app
 
 # Cache Buster
-ENV BUILD_VERSION=1.0.5
+ENV BUILD_VERSION=1.0.6
 
 # Install production dependencies for backend
 COPY backend/package*.json ./backend/
