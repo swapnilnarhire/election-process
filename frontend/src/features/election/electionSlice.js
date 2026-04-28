@@ -5,12 +5,13 @@ export const fetchElectionData = createAsyncThunk(
   'election/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const [process, timeline, faqs] = await Promise.all([
+      const [config, process, timeline, faqs] = await Promise.all([
+        electionAPI.getConfig(),
         electionAPI.getProcess(),
         electionAPI.getTimeline(),
         electionAPI.getFaqs(),
       ]);
-      return { process, timeline, faqs };
+      return { config, process, timeline, faqs };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -18,18 +19,25 @@ export const fetchElectionData = createAsyncThunk(
 );
 
 const initialState = {
+  config: {
+    availableMethods: [],
+  },
   process: [],
   timeline: [],
   faqs: [],
+  activeMethod: 'offline',
   loading: false,
   error: null,
-  globalError: null, // Used for snackbar
+  globalError: null,
 };
 
 const electionSlice = createSlice({
   name: 'election',
   initialState,
   reducers: {
+    setMethod: (state, action) => {
+      state.activeMethod = action.payload;
+    },
     clearGlobalError: (state) => {
       state.globalError = null;
     },
@@ -43,6 +51,7 @@ const electionSlice = createSlice({
       })
       .addCase(fetchElectionData.fulfilled, (state, action) => {
         state.loading = false;
+        state.config = action.payload.config;
         state.process = action.payload.process;
         state.timeline = action.payload.timeline;
         state.faqs = action.payload.faqs;
@@ -50,10 +59,10 @@ const electionSlice = createSlice({
       .addCase(fetchElectionData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.globalError = action.payload; // Trigger snackbar
+        state.globalError = action.payload;
       });
   },
 });
 
-export const { clearGlobalError } = electionSlice.actions;
+export const { setMethod, clearGlobalError } = electionSlice.actions;
 export default electionSlice.reducer;

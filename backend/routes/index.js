@@ -12,6 +12,7 @@ router.get('/health', (req, res) => {
 });
 
 // API Routes
+router.get('/config', dataController.getConfig);
 router.get('/process', dataController.getProcess);
 router.get('/timeline', dataController.getTimeline);
 router.get('/faq', dataController.getFaqs);

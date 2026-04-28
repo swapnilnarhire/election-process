@@ -1,11 +1,20 @@
 {
+  "config": {
+    "availableMethods": [
+      { "id": "offline", "label": "Traditional (Offline)", "icon": "business", "description": "Classic polling booth voting." },
+      { "id": "online", "label": "Digital (Online)", "icon": "language", "description": "New secure e-voting system." },
+      { "id": "compare", "label": "Compare Both", "icon": "compare_arrows", "description": "See methods side-by-side." }
+    ]
+  },
   "process": [
     {
       "id": 1,
-      "title": "Registration",
-      "description": "Register to vote in your local constituency.",
+      "title": "Registration (Offline)",
+      "description": "Visit the local election office to submit your physical forms.",
       "uiType": "stepper",
-      "order": 1,
+      "priority": 1,
+      "methods": ["offline"],
+      "tags": ["registration", "mandatory"],
       "metadata": {
         "icon": "how_to_reg",
         "color": "primary",
@@ -14,10 +23,25 @@
     },
     {
       "id": 2,
-      "title": "Verification",
-      "description": "Verify your identity and eligibility.",
+      "title": "Registration (Online)",
+      "description": "Register instantly via the secure national voting portal.",
       "uiType": "stepper",
-      "order": 2,
+      "priority": 1,
+      "methods": ["online"],
+      "tags": ["registration", "mandatory"],
+      "metadata": {
+        "icon": "how_to_reg",
+        "color": "primary"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Verification (Offline)",
+      "description": "Show your physical ID card to the polling officer.",
+      "uiType": "stepper",
+      "priority": 2,
+      "methods": ["offline"],
+      "tags": ["verification"],
       "metadata": {
         "icon": "verified_user",
         "color": "secondary",
@@ -25,15 +49,43 @@
       }
     },
     {
-      "id": 3,
-      "title": "Voting",
-      "description": "Cast your vote on election day.",
+      "id": 4,
+      "title": "Verification (Online)",
+      "description": "Complete biometric facial recognition via the mobile app.",
       "uiType": "stepper",
-      "order": 3,
+      "priority": 2,
+      "methods": ["online"],
+      "tags": ["verification", "biometric"],
+      "metadata": {
+        "icon": "fingerprint",
+        "color": "secondary"
+      }
+    },
+    {
+      "id": 5,
+      "title": "Voting (Offline)",
+      "description": "Cast your vote using the electronic voting machine (EVM).",
+      "uiType": "stepper",
+      "priority": 3,
+      "methods": ["offline"],
+      "tags": ["voting"],
       "metadata": {
         "icon": "how_to_vote",
         "color": "success",
         "image": "/images/voting.png"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Voting (Online)",
+      "description": "Select your candidate securely via the encrypted app.",
+      "uiType": "stepper",
+      "priority": 3,
+      "methods": ["online"],
+      "tags": ["voting", "encrypted"],
+      "metadata": {
+        "icon": "phonelink_lock",
+        "color": "success"
       }
     }
   ],
@@ -42,31 +94,56 @@
       "id": 1,
       "date": "2024-01-01",
       "phase": "Announcement",
-      "description": "Election dates are officially announced."
+      "description": "Election dates are officially announced.",
+      "methods": ["online", "offline"],
+      "priority": 1
     },
     {
       "id": 2,
       "date": "2024-03-15",
-      "phase": "Registration Deadline",
-      "description": "Last day to register to vote."
+      "phase": "Offline Registration Deadline",
+      "description": "Last day to submit physical forms.",
+      "methods": ["offline"],
+      "priority": 2
     },
     {
       "id": 3,
+      "date": "2024-04-15",
+      "phase": "Online Registration Deadline",
+      "description": "Last day to register via the portal.",
+      "methods": ["online"],
+      "priority": 3
+    },
+    {
+      "id": 4,
       "date": "2024-05-01",
       "phase": "Election Day",
-      "description": "Polling booths are open."
+      "description": "Polling booths open and app voting begins.",
+      "methods": ["online", "offline"],
+      "priority": 4
     }
   ],
   "faq": [
     {
       "id": 1,
       "question": "How do I register to vote?",
-      "answer": "You can register online or visit your local election office."
+      "answer": "You can visit the local office (Offline) or use the portal (Online).",
+      "methods": ["online", "offline"],
+      "priority": 1
     },
     {
       "id": 2,
-      "question": "What ID is required?",
-      "answer": "A valid government-issued photo ID is required to vote."
+      "question": "What ID is required for offline?",
+      "answer": "A physical government-issued photo ID is required at the booth.",
+      "methods": ["offline"],
+      "priority": 2
+    },
+    {
+      "id": 3,
+      "question": "Is the online app secure?",
+      "answer": "Yes, it uses end-to-end encryption and biometric verification.",
+      "methods": ["online"],
+      "priority": 3
     }
   ]
 }
