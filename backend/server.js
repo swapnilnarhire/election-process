@@ -52,16 +52,18 @@ if (isProduction) {
   const frontendPath = path.resolve(__dirname, '../frontend/dist');
   app.use(express.static(frontendPath));
 
-  console.log(`[SERVER] Serving frontend from: ${frontendPath}`);
-  
-  app.get('*', (req, res, next) => {
-    // Skip if it's an API request
+  app.use((req, res, next) => {
+    // If it starts with /api, it should have been handled by previous routes
     if (req.path.startsWith('/api')) return next();
     
+    // Otherwise, serve index.html for all frontend routes
     res.sendFile(path.join(frontendPath, 'index.html'), (err) => {
       if (err) {
-        console.error('[ERROR] Failed to send index.html:', err);
-        res.status(500).json({ success: false, error: 'Frontend build not found' });
+        // Only log if it's not a 404 for a missing asset (to avoid log noise)
+        if (err.status !== 404) {
+          console.error('[ERROR] res.sendFile failed:', err);
+        }
+        next(); // Let the error handler or 404 handler take over
       }
     });
   });
