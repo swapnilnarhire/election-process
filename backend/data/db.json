@@ -8,7 +8,8 @@
       "order": 1,
       "metadata": {
         "icon": "how_to_reg",
-        "color": "primary"
+        "color": "primary",
+        "image": "/images/registration.png"
       }
     },
     {
@@ -19,7 +20,8 @@
       "order": 2,
       "metadata": {
         "icon": "verified_user",
-        "color": "secondary"
+        "color": "secondary",
+        "image": "/images/verification.png"
       }
     },
     {
@@ -30,7 +32,8 @@
       "order": 3,
       "metadata": {
         "icon": "how_to_vote",
-        "color": "success"
+        "color": "success",
+        "image": "/images/voting.png"
       }
     }
   ],

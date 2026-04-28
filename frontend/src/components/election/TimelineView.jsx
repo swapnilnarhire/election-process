@@ -15,12 +15,12 @@ const TimelineView = ({ data = [] }) => {
                 <EventIcon color="secondary" />
               </ListItemIcon>
               <ListItemText
+                disableTypography
                 primary={
                   <Typography variant="h6" color="text.primary">
                     {item.phase}
                   </Typography>
                 }
-                secondaryTypographyProps={{ component: 'div' }}
                 secondary={
                   <React.Fragment>
                     <Typography component="span" variant="body2" color="primary" sx={{ fontWeight: 'bold', display: 'block', mb: 0.5 }}>

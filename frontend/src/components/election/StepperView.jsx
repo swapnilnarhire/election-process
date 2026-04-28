@@ -22,6 +22,11 @@ const StepperView = ({ data = [] }) => {
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
+              {step.metadata?.image && (
+                <Box sx={{ mt: 2, mb: 2, borderRadius: 2, overflow: 'hidden', boxShadow: 1, maxWidth: 300 }}>
+                  <img src={step.metadata.image} alt={step.title} style={{ width: '100%', display: 'block' }} />
+                </Box>
+              )}
               <Box sx={{ mb: 2, mt: 2 }}>
                 <Button
                   variant="contained"
