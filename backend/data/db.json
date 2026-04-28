@@ -1,0 +1,69 @@
+{
+  "process": [
+    {
+      "id": 1,
+      "title": "Registration",
+      "description": "Register to vote in your local constituency.",
+      "uiType": "stepper",
+      "order": 1,
+      "metadata": {
+        "icon": "how_to_reg",
+        "color": "primary"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Verification",
+      "description": "Verify your identity and eligibility.",
+      "uiType": "stepper",
+      "order": 2,
+      "metadata": {
+        "icon": "verified_user",
+        "color": "secondary"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Voting",
+      "description": "Cast your vote on election day.",
+      "uiType": "stepper",
+      "order": 3,
+      "metadata": {
+        "icon": "how_to_vote",
+        "color": "success"
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": 1,
+      "date": "2024-01-01",
+      "phase": "Announcement",
+      "description": "Election dates are officially announced."
+    },
+    {
+      "id": 2,
+      "date": "2024-03-15",
+      "phase": "Registration Deadline",
+      "description": "Last day to register to vote."
+    },
+    {
+      "id": 3,
+      "date": "2024-05-01",
+      "phase": "Election Day",
+      "description": "Polling booths are open."
+    }
+  ],
+  "faq": [
+    {
+      "id": 1,
+      "question": "How do I register to vote?",
+      "answer": "You can register online or visit your local election office."
+    },
+    {
+      "id": 2,
+      "question": "What ID is required?",
+      "answer": "A valid government-issued photo ID is required to vote."
+    }
+  ]
+}
