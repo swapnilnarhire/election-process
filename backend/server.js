@@ -13,8 +13,17 @@ const app = express();
 // Security and Performance Middlewares
 app.use(helmet()); // Production Hardening: Security headers
 app.use(compression()); // Production Hardening: Compress responses
-const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
-app.use(cors({ origin: allowedOrigin }));
+const isProduction = process.env.NODE_ENV === 'production';
+const allowedOrigin = isProduction 
+  ? (process.env.ALLOWED_ORIGIN || true) // 'true' reflects the request origin
+  : 'http://localhost:5173';
+
+app.use(cors({ 
+  origin: allowedOrigin,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Logging and Body Parsing Middlewares
 app.use(logger);
