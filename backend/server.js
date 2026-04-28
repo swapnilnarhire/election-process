@@ -48,16 +48,22 @@ app.use(express.json());
 app.use('/api', routes);
 
 // Serve Static Frontend in Production
-if (config.env === 'production') {
-  const frontendPath = path.join(__dirname, '../frontend/dist');
+if (isProduction) {
+  const frontendPath = path.resolve(__dirname, '../frontend/dist');
   app.use(express.static(frontendPath));
 
-  console.log('[SERVER] Serving frontend via middleware');
-  app.use((req, res, next) => {
-    if (req.path.startsWith('/api')) {
-      return next();
-    }
-    res.sendFile(path.join(frontendPath, 'index.html'));
+  console.log(`[SERVER] Serving frontend from: ${frontendPath}`);
+  
+  app.get('*', (req, res, next) => {
+    // Skip if it's an API request
+    if (req.path.startsWith('/api')) return next();
+    
+    res.sendFile(path.join(frontendPath, 'index.html'), (err) => {
+      if (err) {
+        console.error('[ERROR] Failed to send index.html:', err);
+        res.status(500).json({ success: false, error: 'Frontend build not found' });
+      }
+    });
   });
 }
 
