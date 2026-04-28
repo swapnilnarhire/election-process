@@ -13,7 +13,8 @@ const app = express();
 // Security and Performance Middlewares
 app.use(helmet()); // Production Hardening: Security headers
 app.use(compression()); // Production Hardening: Compress responses
-app.use(cors({ origin: process.env.NODE_ENV === 'production' ? 'http://localhost:5000' : 'http://localhost:5173' }));
+const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
+app.use(cors({ origin: allowedOrigin }));
 
 // Logging and Body Parsing Middlewares
 app.use(logger);
