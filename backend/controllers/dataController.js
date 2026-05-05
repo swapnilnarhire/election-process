@@ -44,9 +44,19 @@ const getFaqs = async (req, res, next) => {
   }
 };
 
+const getCandidates = async (req, res, next) => {
+  try {
+    const data = await dataService.getCandidates(req.query);
+    sendResponse(res, data);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getConfig,
   getProcess,
   getTimeline,
   getFaqs,
+  getCandidates,
 };

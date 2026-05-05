@@ -55,9 +55,8 @@ body {
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
@@ -108,4 +107,47 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* Map Styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  z-index: 1;
+  background-color: #aad3df; /* Matches OSM ocean color */
+}
+
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.custom-marker div {
+  transform: rotate(45deg);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-cluster-custom {
+  background: var(--accent-bg);
+  border: 2px solid var(--accent);
+  color: var(--text-h);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
 }

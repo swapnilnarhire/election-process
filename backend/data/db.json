@@ -145,5 +145,87 @@
       "methods": ["online"],
       "priority": 3
     }
+  ],
+  "candidates": [
+    {
+      "id": "cand_1",
+      "name": "Arjun Sharma",
+      "party": "National Progress Party (NPP)",
+      "constituency": "Mumbai South",
+      "location": { "lat": 18.922, "lng": 72.834 },
+      "bounds": [[18.90, 72.80], [18.95, 72.85]],
+      "tags": ["urban", "incumbent", "environment"],
+      "priority": 1,
+      "metadata": {
+        "votesLastElection": 450000,
+        "winProbability": 0.65,
+        "aiScoringReady": true,
+        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun"
+      }
+    },
+    {
+      "id": "cand_2",
+      "name": "Priya Patel",
+      "party": "People's Democratic Alliance (PDA)",
+      "constituency": "Mumbai North",
+      "location": { "lat": 19.228, "lng": 72.856 },
+      "bounds": [[19.20, 72.83], [19.25, 72.88]],
+      "tags": ["education", "youth", "reformer"],
+      "priority": 1,
+      "metadata": {
+        "votesLastElection": 380000,
+        "winProbability": 0.58,
+        "aiScoringReady": true,
+        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya"
+      }
+    },
+    {
+      "id": "cand_3",
+      "name": "Vikram Singh",
+      "party": "United Workers Party (UWP)",
+      "constituency": "New Delhi Central",
+      "location": { "lat": 28.613, "lng": 77.209 },
+      "bounds": [[28.58, 77.18], [28.64, 77.24]],
+      "tags": ["labor", "industry", "veteran"],
+      "priority": 2,
+      "metadata": {
+        "votesLastElection": 520000,
+        "winProbability": 0.72,
+        "aiScoringReady": true,
+        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram"
+      }
+    },
+    {
+      "id": "cand_4",
+      "name": "Ananya Reddy",
+      "party": "National Progress Party (NPP)",
+      "constituency": "Bangalore Central",
+      "location": { "lat": 12.971, "lng": 77.594 },
+      "bounds": [[12.94, 77.56], [13.00, 77.62]],
+      "tags": ["tech", "startup", "infrastructure"],
+      "priority": 1,
+      "metadata": {
+        "votesLastElection": 310000,
+        "winProbability": 0.45,
+        "aiScoringReady": true,
+        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya"
+      }
+    },
+    {
+      "id": "cand_5",
+      "name": "Sanjay Gupta",
+      "party": "Independent",
+      "constituency": "Mumbai South",
+      "location": { "lat": 18.930, "lng": 72.830 },
+      "bounds": [[18.91, 72.81], [18.95, 72.85]],
+      "tags": ["local", "community"],
+      "priority": 3,
+      "metadata": {
+        "votesLastElection": 15000,
+        "winProbability": 0.05,
+        "aiScoringReady": false,
+        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sanjay"
+      }
+    }
   ]
 }
